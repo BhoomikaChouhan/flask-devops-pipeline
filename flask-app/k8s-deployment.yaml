@@ -14,8 +14,8 @@ spec:
     spec:
       containers:
         - name: flask-container
-          image: bhoomika-flask-app
-          imagePullPolicy: Never
+          image: bhoomikachouhan/bhoomika-flask-app:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 5000
 ---
@@ -24,9 +24,10 @@ kind: Service
 metadata:
   name: flask-service
 spec:
-  type: ClusterIP
+  type: NodePort
   selector:
     app: flask-app
   ports:
     - port: 80
       targetPort: 5000
+      nodePort: 30007
